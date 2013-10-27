@@ -5,16 +5,21 @@ import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 class PermissionManager implements Listener {
-	@SuppressWarnings("unused")
 	private Permissions plugin;
 	private HashMap<String, OnlinePerms> perms;
 	
 	public PermissionManager(Permissions plugin) {
 		this.plugin = plugin;
 		this.perms = new HashMap<String, OnlinePerms>();
+		
+		// Register events
+		Bukkit.getServer().getPluginManager().registerEvents(this, this.plugin);
 	}
 	
 	public boolean hasPerm(Player player, String perm) {
@@ -123,5 +128,17 @@ class PermissionManager implements Listener {
 		
 		// Permission was not added due to error, return false
 		return false;
+	}
+	
+	@EventHandler
+	public void onJoin(PlayerJoinEvent event) {
+		// On player join load up their permissions
+	    this.perms.put(event.getPlayer().getName(), new OnlinePerms(event.getPlayer()));
+	}
+	
+	@EventHandler
+	public void onQuit(PlayerQuitEvent event) {
+		// On player quit, discard their permissions
+		this.perms.remove(event.getPlayer().getName());
 	}
 }
