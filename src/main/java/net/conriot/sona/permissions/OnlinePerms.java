@@ -142,11 +142,18 @@ class OnlinePerms implements IOCallback {
 		String ns = getNamespace(perm);
 		
 		// Try removing it from the namespace if it exists
-		if(ns != null)
-			this.namespaces.get(ns).remove(perm);
+		if(ns != null) {
+			HashSet<String> set = this.namespaces.get(ns);
+			if(set != null)
+				set.remove(perm);
+			else {
+				Bukkit.getLogger().warning("Could not remove permission \"" + perm + "\" from namespace \"" + ns + "\"");
+				Bukkit.getLogger().warning("No permissions exist under that namespace");
+			}
+		}
 		
 		// Remove the permission node the the global list of permissions
-		this.perms.add(perm);
+		this.perms.remove(perm);
 		
 		// Create a query to save the player's new permission
 		Query q = MySQL.makeQuery();
@@ -170,7 +177,7 @@ class OnlinePerms implements IOCallback {
 	
 	private String getNamespace(String permission) {
 		// Split the string to find the namespace of the node if there is one
-		String[] split = permission.split(".");
+		String[] split = permission.split("\\.");
 		
 		// If namespace found, return it
 		if(split.length > 1)
