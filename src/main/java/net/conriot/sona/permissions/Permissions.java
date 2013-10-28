@@ -77,7 +77,7 @@ public class Permissions extends JavaPlugin {
 			return false;
 		}
 		// Check if all permission match in a namespace
-		return hasAllPermsInNamespace(player, namespace, perms);
+		return pm.hasAllPermsInNamespace(player, namespace, perms);
 	}
 	
 	public static boolean addPerm(Player player, String perm) {
