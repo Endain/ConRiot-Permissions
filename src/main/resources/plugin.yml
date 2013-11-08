@@ -12,3 +12,4 @@ website: http://ConRiot.net
 description: Permissions module developed for ConRiot
 author: [Endain]
 main: net.conriot.sona.permissions.Permissions
+depend: [CRM-MySQL]
