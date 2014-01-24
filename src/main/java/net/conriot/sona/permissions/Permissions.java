@@ -82,7 +82,7 @@ public class Permissions extends JavaPlugin {
 	
 	public static boolean addPerm(Player player, String perm) {
 		if(pm == null) {
-			Bukkit.getLogger().warning("Could not check permission for \"" + player.getName() + "\"!");
+			Bukkit.getLogger().warning("Could not add permission for \"" + player.getName() + "\"!");
 			Bukkit.getLogger().warning("Permission manager is not loaded!");
 			return false;
 		}
@@ -92,7 +92,7 @@ public class Permissions extends JavaPlugin {
 	
 	public static boolean removePerm(Player player, String perm) {
 		if(pm == null) {
-			Bukkit.getLogger().warning("Could not check permission for \"" + player.getName() + "\"!");
+			Bukkit.getLogger().warning("Could not remove permission for \"" + player.getName() + "\"!");
 			Bukkit.getLogger().warning("Permission manager is not loaded!");
 			return false;
 		}
