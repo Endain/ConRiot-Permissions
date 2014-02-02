@@ -215,10 +215,10 @@ class OnlinePerms implements IOCallback {
 					
 					// Add the permission node the the global list of permissions
 					this.perms.add((String)result.get(0));
-					
-					// Flag this player as having their permissions loaded
-					this.loaded = true;
 				}
+				
+				// Flag this player as having their permissions loaded
+				this.loaded = true;
 			} else {
 				Bukkit.getLogger().warning("Could not load permissions for \"" + player.getName() + "\"");
 			}
